@@ -11,8 +11,8 @@ public class AccountService {
         return;
     }
 
-    public Account getAccountByUsername(String username) {
-        return ;
+    public Account getAccountByUsername(Account placeholder) {
+        return placeholder;
     }
 
     

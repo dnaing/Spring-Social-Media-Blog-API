@@ -33,7 +33,7 @@ public class SocialMediaController {
     @PostMapping("register")
     public ResponseEntity<Account> register(@RequestBody Account account) {
         accountService.register(account);
-        Account registeredAccount = accountService.getAccountByUsername(account.getUsername());
+        Account registeredAccount = accountService.getAccountByUsername(account);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(registeredAccount);
     }
