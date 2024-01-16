@@ -49,6 +49,45 @@ public class MessageService {
                 .body(messageRepository.findAll());     
     }
 
+    public ResponseEntity<Message> getMessageById(int id) {
+        Optional<Message> searchedMessage = messageRepository.findById(id);
+        if (searchedMessage.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(searchedMessage.get());
+        }
+        return null;
+    }
+
+    public ResponseEntity<Integer> deleteMessageById(int id) {
+        Optional<Message> searchedMessage = messageRepository.findById(id);
+        if (!searchedMessage.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(null);
+        }
+        else {
+            messageRepository.deleteById(id);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(1);
+        }
+    }
+
+    public ResponseEntity<Integer> updateMessageById(int message_id, String message_text) {
+        Optional<Message> searchedMessage = messageRepository.findById(message_id);
+        if (searchedMessage.isPresent() == false ||
+            message_text.length() == 0 ||
+            message_text.length() > 255) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(null);
+        }
+        else {
+            Message message = searchedMessage.get();
+            message.setMessage_text(message_text);
+            messageRepository.save(message);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(1);
+        }
+    }
+
 
 
     
