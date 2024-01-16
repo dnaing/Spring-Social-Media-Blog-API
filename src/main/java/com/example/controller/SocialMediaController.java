@@ -21,13 +21,6 @@ import java.util.List;
 
 import javax.websocket.server.PathParam;
 
-/**
- * TODO: You will need to write your own endpoints and handlers for your controller using Spring. The endpoints you will need can be
- * found in readme.md as well as the test cases. You be required to use the @GET/POST/PUT/DELETE/etc Mapping annotations
- * where applicable as well as the @ResponseBody and @PathVariable annotations. You should
- * refer to prior mini-project labs and lecture materials for guidance on how a controller may be built.
- */
-
 @RestController
 public class SocialMediaController {
 
@@ -73,6 +66,11 @@ public class SocialMediaController {
     @PatchMapping("messages/{message_id}")
     public ResponseEntity<Integer> updateMessageById(@PathVariable int message_id, @RequestBody Message message) {
         return messageService.updateMessageById(message_id, message.getMessage_text());
+    }
+
+    @GetMapping("accounts/{account_id}/messages")
+    public ResponseEntity<List<Message>> getAllMessagesByAccountId(@PathVariable int account_id) {
+        return messageService.getAllMessagesByAccountId(account_id);
     }
 
 

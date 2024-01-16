@@ -88,6 +88,11 @@ public class MessageService {
         }
     }
 
+    public ResponseEntity<List<Message>> getAllMessagesByAccountId(int account_id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(messageRepository.findAllMessagesByPostedBy(account_id));     
+    }
+
 
 
     
